@@ -7,7 +7,7 @@ HTML_JUEGO = """
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Juego del Click cambio</title>
+    <title>Juego del Click </title>
     <style>
         body {
             font-family: Arial;
@@ -39,7 +39,7 @@ HTML_JUEGO = """
 </head>
 <body>
 
-    <h1>Juego del Click</h1>
+    <h1>Juego del Click Cambio 2.1</h1>
     <h2>Puntos: <span id="puntos">0</span></h2>
 
     <button onclick="sumar()">Sumar Punto</button>

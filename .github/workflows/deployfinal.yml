@@ -10,7 +10,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: redin
+  IMAGE_NAME: redin1
   IMAGE_TAG: 1.0.5
   REPO_OWNER: cristianredin
 

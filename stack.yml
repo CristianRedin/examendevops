@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   redin:
-    image: ghcr.io/cristianredin/redin:1.0.5
+    image: ghcr.io/cristianredin/redin1:1.0.5
     environment:
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
 
