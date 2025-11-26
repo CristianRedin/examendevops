@@ -86,7 +86,7 @@ jobs:
         host: 161.97.140.245
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
-        port: 1987              # 🔥 CORREGIDO
+        port: 1002              # 🔥 CORREGIDO
         script: |
           echo "🔐 Logging in to GHCR..."
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ env.REPO_OWNER }} --password-stdin
