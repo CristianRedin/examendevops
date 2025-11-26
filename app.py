@@ -7,7 +7,7 @@ HTML_JUEGO = """
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Juego del Click</title>
+    <title>Juego del Click cambio</title>
     <style>
         body {
             font-family: Arial;
