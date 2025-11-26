@@ -22,8 +22,18 @@ HTML_JUEGO = """
             border: none;
             border-radius: 10px;
             cursor: pointer;
+            margin: 10px;
         }
         button:hover { background: #2980b9; }
+
+        /* Botón reiniciar */
+        .reset {
+            background: #e74c3c;
+        }
+        .reset:hover {
+            background: #c0392b;
+        }
+
         h1 { color: #2c3e50; }
     </style>
 </head>
@@ -33,10 +43,17 @@ HTML_JUEGO = """
     <h2>Puntos: <span id="puntos">0</span></h2>
 
     <button onclick="sumar()">Sumar Punto</button>
+    <button class="reset" onclick="reiniciar()">Reiniciar</button>
 
     <script>
         async function sumar() {
             const res = await fetch("/sumar");
+            const data = await res.json();
+            document.getElementById("puntos").innerText = data.puntos;
+        }
+
+        async function reiniciar() {
+            const res = await fetch("/reset");
             const data = await res.json();
             document.getElementById("puntos").innerText = data.puntos;
         }
@@ -68,6 +85,12 @@ def obtener_puntos():
 def sumar_punto():
     global puntos
     puntos += 1
+    return jsonify({"puntos": puntos})
+
+@app.route("/reset")
+def resetear_puntos():
+    global puntos
+    puntos = 0
     return jsonify({"puntos": puntos})
 
 if __name__ == "__main__":
