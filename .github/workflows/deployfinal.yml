@@ -52,8 +52,8 @@ jobs:
       with:
         registry: ${{ env.REGISTRY }}
         username: ${{ env.REPO_OWNER }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-
+        password: ${{ secrets.GHCR_PAT }}     # <-- LISTO
+        
     - name: 🏗️ Build and push Docker image
       uses: docker/build-push-action@v6
       with:
@@ -76,7 +76,7 @@ jobs:
         host: 161.97.140.245
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
-        port: 1002              # 🔥 CORREGIDO
+        port: 1002
         source: "stack.yml"
         target: "/home/${{ secrets.VPS_USER }}/automatizar"
 
@@ -86,10 +86,10 @@ jobs:
         host: 161.97.140.245
         username: ${{ secrets.VPS_USER }}
         password: ${{ secrets.VPS_PASSWORD }}
-        port: 1002              # 🔥 CORREGIDO
+        port: 1002
         script: |
           echo "🔐 Logging in to GHCR..."
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ env.REPO_OWNER }} --password-stdin
+          echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ env.REPO_OWNER }} --password-stdin
           
           echo "📥 Pulling latest image..."
           docker pull ghcr.io/${{ env.REPO_OWNER }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
