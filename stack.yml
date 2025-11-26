@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  redin:
+    image: ghcr.io/cristianredin/redin:1.0.5
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+
+    deploy:
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+
+        # HTTP → HTTPS redirect
+        - "traefik.http.routers.redin.entrypoints=http"
+        - "traefik.http.routers.redin.rule=Host(`redin.byronrm.com`)"
+        - "traefik.http.middlewares.redin-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.redin.middlewares=redin-https-redirect"
+
+        # HTTPS router
+        - "traefik.http.routers.redin-secure.entrypoints=https"
+        - "traefik.http.routers.redin-secure.rule=Host(`redin.byronrm.com`)"
+        - "traefik.http.routers.redin-secure.tls=true"
+        - "traefik.http.routers.redin-secure.tls.certresolver=http"
+        - "traefik.http.routers.redin-secure.service=redin"
+
+        # Service port exposed by your container
+        - "traefik.http.services.redin.loadbalancer.server.port=5050"
+
+        # Required network
+        - "traefik.docker.network=traefik-public"
+
+    networks:
+      - traefik-public
+
+networks:
+  traefik-public:
+    external: true
